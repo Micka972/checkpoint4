@@ -11,5 +11,8 @@ const itemsRouter = require("./items/router");
 router.use("/items", itemsRouter);
 
 /* ************************************************************************* */
+const tasksRouter = require("./tasks/router");
+
+router.use("/tasks", tasksRouter);
 
 module.exports = router;
