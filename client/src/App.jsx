@@ -12,6 +12,35 @@ function App() {
   useEffect(() => {
     const storedLists = JSON.parse(localStorage.getItem("taskLists")) || [];
     setLists(storedLists);
+
+    // Envoi des données au backend
+    const sendDataToBackend = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/task`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(storedLists),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Erreur lors de l'envoi des données au serveur");
+        }
+
+        console.info("Données envoyées avec succès au serveur.");
+      } catch (error) {
+        console.error(
+          "Erreur lors de l'envoi des données au serveur:",
+          error.message
+        );
+      }
+    };
+
+    sendDataToBackend();
   }, []);
 
   function handleInputChangeTitle(e) {
