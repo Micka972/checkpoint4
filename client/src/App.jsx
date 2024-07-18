@@ -61,6 +61,12 @@ function App() {
     setTasksDone([]);
   }
 
+  function deleteList(listId) {
+    const updatedLists = lists.filter((list) => list.id !== listId);
+    setLists(updatedLists);
+    localStorage.setItem("taskLists", JSON.stringify(updatedLists));
+  }
+
   return (
     <main className="container">
       <header>
@@ -146,6 +152,9 @@ function App() {
                 <li key={task.id}>{task.text}</li>
               ))}
             </ul>
+            <button type="button" onClick={() => deleteList(list.id)}>
+              Supprimer Liste
+            </button>
           </div>
         ))}
       </section>
