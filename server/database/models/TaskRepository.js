@@ -12,8 +12,8 @@ class TaskRepository extends AbstractRepository {
   async create(task) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (name, description, priority, listID) values (?, ?, ?, ?)`,
-      [task.name, task.description, task.priority, task.listID]
+      `insert into ${this.table} (name, description, listID) values (?, ?, ?)`,
+      [task.name, task.description, task.listID]
     );
 
     // Return the ID of the newly inserted item
